@@ -1,0 +1,48 @@
+\documentclass[phd, macos]{buptthesis}
+
+\BUPTthesiscntitlepage{%
+	title = {北京邮电大学\\博士论文\LaTeX 模板},
+	studentid = {2019},
+	name = {博\quad 士},
+	major = {信息与通信工程},
+	supervisor = {博\quad 导},
+	institute = {XX学院},
+	degreetype = {工学},
+	confidential = {~~},
+	confidentialtime = {~~}}
+
+\BUPTthesisentitlepage{%
+	title = {A \LaTeX~TEMPLATE FOR PH.D. DISSERTATION OF BUPT},
+	desc = {A DISSERTATION\\SUBMITTED TO THE FACULTY OF THE GRADUATE\\SCHOOL OF BEIJING UNIVERSITY OF POSTS AND\\TELECOMMUNICATIONS},
+	name = {BY\\DOCTOR},
+	supervisor = {PROF. SOMEONE, PH.D. ADVISOR},
+	major = {INFORMATION AND COMMUNICATIONS ENGINEERING},
+	degree = {FOR THE DEGREE OF
+		\\ DOCTOR OF PHILOSOPHY IN\\INFORMATION AND COMMUNICATIONS ENGINEERING}
+}
+\begin{document}
+
+\makechinesetitle
+\clearpage
+\makestatement
+\makeenglishtitle
+%
+\frontmatter
+\include{Chapter/Chapter_cnabstract}
+\include{Chapter/Chapter_enabstract}
+\tableofcontents
+\listoffigures
+\listoftables
+%%
+%\include{Chapter/Chapter_nomenclature}
+%
+\mainmatter
+\include{Chapter/Chapter_Introduction}
+\bibliography{Bib/thesis}
+
+\backmatter
+\include{Chapter/Chapter_abbreviation}
+\include{Chapter/Chapter_acknowledgement}
+\include{Chapter/Chapter_publication}
+
+ \end{document}
