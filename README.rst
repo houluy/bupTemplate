@@ -8,4 +8,6 @@ This is a latex template for PhDs in BUPT to finish their dissertation in a no-h
 AUTHOR LIST
 ------------------
 
-Check [this file](https://github.com/houluy/bupTemplate/blob/master/AUTHORS.rst) for author list.
+Check `this file`_ for author list.
+
+.. _this file: https://github.com/houluy/bupTemplate/blob/master/AUTHORS.rst
