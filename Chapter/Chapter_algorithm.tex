@@ -1,0 +1,35 @@
+\chapter{算法}
+
+\section{公式}
+
+内联公式：$C = B\log(1 + \gamma)$。
+
+编号公式：
+
+\begin{equation}
+J = \frac{1}{2N}\sum(h(x) - y)^2
+\end{equation}
+
+\begin{equation}
+\nabla J = \frac{1}{N}[\sum(h(x) - y)x]
+\end{equation}
+
+\section{算法}
+
+\begin{algorithm}[!htb]
+	算法默认采用宏包algorithm2e排版\;
+	\BlankLine
+	\While{$r < R$} {
+		\For{$i = 0$ \KwTo $100$}{
+			\If(条件语句可以在这里增加注释){$i = 10$}{
+				\lIf{$r = 20$}{$r = r + 1$}
+				\tcp{这里可以编写算法注释}
+				\lElse{$r\leftarrow i$}
+			}
+		}
+	}
+	\caption{algorithm2e算法编写示意}
+	\label{chap_algo:example}
+\end{algorithm}
+
+引用该算法\ref*{chap_algo:example}。

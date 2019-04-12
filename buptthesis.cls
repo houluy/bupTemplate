@@ -1,6 +1,8 @@
 %% -----------------------------------------------------------------
 %% 
-%% Copyright (C) 2016 -- 201X by Haojun Yang
+%% Copyright (C) 2016 -- 201X by 
+%%
+%% Haojun Yang, Jie Mei, Lu Hou
 %%
 %% -----------------------------------------------------------------
 
@@ -16,17 +18,12 @@
 %% Class option conditionals
 \newif\ifBUPT@option@phd             \BUPT@option@phdtrue
 \newif\ifBUPT@option@master          \BUPT@option@masterfalse
-
 \newif\ifBUPT@option@electronic      \BUPT@option@electronictrue
 \newif\ifBUPT@option@print           \BUPT@option@printfalse
 \newif\ifBUPT@option@draftcls        \BUPT@option@draftclsfalse
-
 \newif\ifBUPT@option@cenhdr          \BUPT@option@cenhdrfalse
-
 \newif\ifBUPT@option@normaltoc       \BUPT@option@normaltocfalse
-
 \newif\ifBUPT@option@txmath          \BUPT@option@txmathfalse
-
 \newif\ifBUPT@option@macos           \BUPT@option@macosfalse
 
 %%blankdblpage
@@ -80,8 +77,7 @@
 %% \ExecuteOptions{letterpaper,10pt,twoside,onecolumn,final,openright}
 
 \ifBUPT@option@macos
-  \LoadClass[UTF8,a4paper,zihao = -4,fontset = none]{ctexbook}[2015/05/03]
-  \ctexset{fontset=fandol}
+  \LoadClass[UTF8, a4paper, twoside, zihao = -4, fontset = fandol, sub3section]{ctexbook}[2015/05/03]
 \else
   \LoadClass[UTF8,a4paper,zihao = -4,fontset = fandol]{ctexbook}[2015/05/03]
 \fi
@@ -285,8 +281,9 @@
   listtablename = {表目录}
 }
 
-%% linespread!!!
+%% linespread行间距
 \setlength\parskip{\p@}%0\p@ \@plus 0.1\p@}
+\linespread{1.3} % 1.5倍行距，要求为20磅，小四号字体情况下差2磅
 
 %% Set ToC depth
 \setcounter{tocdepth}{2}
