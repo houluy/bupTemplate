@@ -10,4 +10,4 @@ ctex
 选项
 ************
 
-`sub3section`： 将`\paragraph`后的内容另起一行排版。如非必须，建议将`\paragraph`调整为`enumerate`。
+- ``sub3section``： 将``\paragraph``后的内容另起一行排版。如非必须，建议将``\paragraph``调整为``enumerate``。
