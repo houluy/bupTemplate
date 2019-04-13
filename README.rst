@@ -14,7 +14,13 @@ Full docs are listed here_.
 AUTHOR LIST
 ------------------
 
-Check `this file`_ for author list.
+***************
+INITIATOR
+***************
+
+The first version of this template is designed and implemented by Haojun Yang <yanghaojun.yhj@gmail.com>, great thanks for his creativeness and wisdom.
+
+Check `this file`_ for complete author list.
 
 .. _this file: https://github.com/houluy/bupTemplate/blob/master/AUTHORS.rst
 .. _here: https://github.com/houluy/bupTemplate/blob/master/docs/main.rst

@@ -2,12 +2,6 @@
 AUTHORS
 ===============
 
----------------
-INITIATOR
----------------
-
-- Haojun Yang <yanghaojun.yhj@gmail.com>
-
 -----------------
 MAIN CONTRIBUTORS
 -----------------
