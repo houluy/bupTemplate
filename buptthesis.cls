@@ -77,9 +77,21 @@
 %% \ExecuteOptions{letterpaper,10pt,twoside,onecolumn,final,openright}
 
 \ifBUPT@option@macos
-  \LoadClass[UTF8, a4paper, twoside, zihao = -4, fontset = fandol, sub3section]{ctexbook}[2015/05/03]
+  \LoadClass[
+  	UTF8,
+  	a4paper,
+  	twoside,
+  	sub3section,
+  	zihao = -4,
+  	fontset = fandol
+  ]{ctexbook}[2015/05/03]
 \else
-  \LoadClass[UTF8,a4paper,zihao = -4,fontset = fandol]{ctexbook}[2015/05/03]
+  \LoadClass[
+  	UTF8,
+  	a4paper,
+  	zihao = -4,
+  	fontset = fandol
+  ]{ctexbook}[2015/05/03]
 \fi
 
 %% -----------------------------------------------------------------
@@ -151,7 +163,13 @@
 \RequirePackage{acronym}
 \RequirePackage{IEEEtrantools}
 
-\RequirePackage[linesnumbered,lined,boxruled,commentsnumbered,algochapter]{algorithm2e}
+\RequirePackage[
+	linesnumbered,
+	lined,
+	boxruled,
+	commentsnumbered,
+	algochapter
+]{algorithm2e}
 \RequirePackage{mathtools}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
@@ -454,6 +472,10 @@
     pdfauthor={Author Name},%
     pdfkeywords={BUPT, Thesis, LaTeX, Template}}
 \fi
+
+%% Extra definitions
+\newcommand{\cemph}[1]{\textcolor{RubineRed}{#1}}  % Emphasize with color RubineRed
+\DeclareSIUnit{\mdecibel}{\decibel\metre}  % dBm
 
 %% -----------------------------------------------------------------
 

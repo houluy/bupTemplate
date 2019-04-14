@@ -14,6 +14,35 @@ J = \frac{1}{2N}\sum(h(x) - y)^2
 \nabla J = \frac{1}{N}[\sum(h(x) - y)x]
 \end{equation}
 
+多行公式：
+
+\begin{equation}
+f(x) = \left\{
+	\begin{aligned}
+	x + 1, &x < 0\\
+	x - 1, &x \geq 0\\
+	\end{aligned}
+\right.
+\end{equation}
+
+子公式：
+
+\begin{subequations}\label{activation}
+	\begin{equation}\label{act_softmax}
+	g_1(\mathbf{z})_i = \frac{e^{z_i}}{\sum_{j = 1}^{K}e^{z_j}}
+	\end{equation}
+	\begin{equation}\label{ant_sigmoid}
+	g_2(x) = \frac{1}{1 + e^{-x}}
+	\end{equation}
+	\begin{equation}\label{ant_tanh}
+	g_3(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
+	\end{equation}
+\end{subequations}
+
+常用激活函数如公式\eqref{activation}给出，其中，公式\eqref{ant_tanh}为双曲正切函数。
+
+公式的行间距1.5倍。
+
 \section{算法}
 
 \begin{algorithm}[!htb]
