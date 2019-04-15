@@ -4,7 +4,7 @@
 
 \subsection{数值与单位}
 
-单位采用宏包\href{http://mirrors.sjtug.sjtu.edu.cn/ctan/macros/latex/contrib/siunitx/siunitx.pdf}{\textit{siunitx}}插入，例如传输速率是$\SI{100}{\mega\byte}$，信噪比为$\SI{20}{\mdecibel}$。（注意，如果要使用字节单位，则需要增加选项\cemph{binary-units}）
+单位采用宏包\href{http://mirrors.sjtug.sjtu.edu.cn/ctan/macros/latex/contrib/siunitx/siunitx.pdf}{\textit{siunitx}}插入，例如传输速率是$\SI{100}{\mega\byte}$，信噪比为$\SI{20}{\mdecibel}$。（注意，如果要使用字节单位，则需要增加选项\cemph{binary-units}） 
 
 引用一个表格\ref{chap:notation}。
 
@@ -28,4 +28,28 @@
 
 \section{图}
 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{scenario.eps}
+	\caption{场景示意图（五号楷体）}
+	\label{chap:scenario}
+\end{figure}
+
+图\ref{chap:scenario}展示了xxx。
+
+\begin{figure}[!htb]
+	\centering
+	\begin{minipage}{0.48\textwidth}
+		\includegraphics[width=\textwidth]{activation.eps}
+		\caption{激活函数}
+		\label{chap:activation}
+	\end{minipage}
+	\begin{minipage}{0.48\textwidth}
+		\includegraphics[width=\textwidth]{linear.eps}
+		\caption{线性函数}
+		\label{chap:linear}
+	\end{minipage}
+\end{figure}
+
+激活函数\ref{chap:activation}，线性函数\ref{chap:linear}
 

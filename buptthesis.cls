@@ -211,7 +211,7 @@
 %% For EPS and PDF figures:
 %\graphicspath{{Figure/PDF/}{Figure/EPS/}}
 %% For only PDF figures:
-\graphicspath{{Figure/EPS/}{Figure/EPS/Chapter1/}}
+\graphicspath{{figures/Chapter_architecture/}}
 %% Page layout
 %% twoside:
 %\geometry{left=2.5cm, right=3cm, top=3cm, bottom=3cm}
