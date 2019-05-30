@@ -2,7 +2,7 @@
 %% 
 %% Copyright (C) 2016 -- 201X by 
 %%
-%% Haojun Yang, Jie Mei, Lu Hou
+%% Haojun Yang, Lu Hou and Jie Mei
 %%
 %% -----------------------------------------------------------------
 
@@ -204,6 +204,12 @@
 \AtEndOfClass{%
   \InputIfFileExists{config/buptthesis.cfg}{}{}}
 \setcounter{secnumdepth}{5}
+
+%% Cover Related Package
+\RequirePackage{xstring}
+\RequirePackage{forloop}
+\RequirePackage[comparenum]{arraysort}
+
 %% -----------------------------------------------------------------
 
 %% Styles setup
@@ -211,7 +217,7 @@
 %% For EPS and PDF figures:
 %\graphicspath{{Figure/PDF/}{Figure/EPS/}}
 %% For only PDF figures:
-\graphicspath{{figures/Chapter_architecture/}}
+\graphicspath{{Figure/EPS/}{Figure/EPS/Chapter1/}}
 %% Page layout
 %% twoside:
 %\geometry{left=2.5cm, right=3cm, top=3cm, bottom=3cm}
@@ -330,6 +336,49 @@
 %% Titlepage
 %% The \hss glue is equivalent to \hskip 0pt plus 1fil minus 1fil.
 \def\BUPTunderline#1#2{\underline{\hbox to #1{\hss #2\hss}}}
+\def\IsPositive#1{%
+	TT\fi
+	\ifcat_\ifnum0<0#1 _\else A\fi}
+\newsavebox\mybox
+\newcommand{\cmpLen}[2]{%
+	\sbox\mybox{#1}\edef\cmpA{\number\wd\mybox}
+	\sbox\mybox{#2}\edef\cmpB{\number\wd\mybox}
+	\if\IsPositive{\cmpA}
+		\if\IsPositive{\cmpB}
+			\arraysortcomparenum{\cmpA}{\cmpB}
+		\else
+			\togglefalse {arraysortresequal}
+			\toggletrue  {arraysortresult}
+		\fi
+	\else
+		\if\IsPositive{\cmpB}
+			\togglefalse {arraysortresequal}
+			\togglefalse {arraysortresult}
+		\else
+			\arraysortcomparenum{\cmpA}{\cmpB}
+		\fi
+	\fi}
+
+\long\def\BUPTtitletemp{\&\BUPT@value@title\&}
+\StrCount{\BUPTtitletemp}{\&}[\tempnum]
+\newcounter{NumofAnd}
+\setcounter{NumofAnd}{\tempnum}
+\newcounter{NumofRow}
+\setcounter{NumofRow}{\the\numexpr\value{NumofAnd}-1\relax}
+\newcounter{BUPTLoop}
+\newcounter{BUPTLoopp}
+\def\BUPTctrset{\setcounter{BUPTLoopp}{\theBUPTLoop}\stepcounter{BUPTLoopp}}
+\newarray{BUPTtitle}
+\expandarrayelementtrue
+\forloop{BUPTLoop}{1}{\value{BUPTLoop} < \value{NumofAnd}}{\BUPTctrset
+	\StrBetween[\value{BUPTLoop},\value{BUPTLoopp}]{\BUPTtitletemp}{\&}{\&}[\tempstr]
+	\BUPTtitle(\value{BUPTLoop})={\tempstr}}
+\sortArray[cmpLen]{\theNumofRow}{BUPTtitle}
+
+\newlength{\BUPTtitlelen}
+\settowidth{\BUPTtitlelen}{\BUPTtitle(\theNumofRow)}
+\addtolength{\BUPTtitlelen}{5pt}
+
 \newcommand\makechinesetitle{%
   \begin{flushright}
     \zihao{4}\bfseries \BUPT@label@confidential\BUPT@value@confidential~~~~\BUPT@label@confidentialtime\BUPT@value@confidentialtime~~~~
@@ -342,10 +391,16 @@
     \vskip \stretch{1}
     \includegraphics[width=3.43cm]{\BUPT@value@schoollogo}
     \vskip \stretch{2}
-    {\zihao{-2}\bfseries \BUPT@label@title\CJKunderline*{\BUPT@value@title}}
+    {\zihao{-2}
+	\renewcommand\arraystretch{1.2}
+	\setlength\extrarowheight{1\p@}\bfseries
+	\begin{tabular}{rc}
+		\BUPT@label@title & \BUPTunderline{\BUPTtitlelen}{\StrBetween[1,2]{\BUPTtitletemp}{\&}{\&}} \\
+		\forloop{BUPTLoop}{2}{\value{BUPTLoop} < \value{NumofAnd}}{ & \BUPTctrset\BUPTunderline{\BUPTtitlelen}{\StrBetween[\value{BUPTLoop},\value{BUPTLoopp}]{\BUPTtitletemp}{\&}{\&}} \\}
+	\end{tabular}}
     \vskip \stretch{1}
     {\zihao{4}
-    \renewcommand\arraystretch{1.3}
+    \renewcommand\arraystretch{1.2}
     \setlength\extrarowheight{1\p@}\bfseries
     \begin{tabular}{lc}
       \BUPT@label@studentid & \BUPTunderline{200\p@}{\BUPT@value@studentid} \\
