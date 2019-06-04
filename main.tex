@@ -1,15 +1,15 @@
-\documentclass[phd, macos]{buptthesis}
+\documentclass[phd]{buptthesis}
 
 \BUPTthesiscntitlepage{%
-	title = {北京邮电大学\&博士论文\LaTeX 模板},
+	title = {北京邮电大学 \\ 博士、硕士论文\LaTeX 模板 \\ 信通院$ \text{IC}^\text{2} $ Laboratory},
 	studentid = {2019},
-	name = {博\quad 士},
+	name = {简单男孩},
 	major = {信息与通信工程},
-	supervisor = {博\quad 导},
-	institute = {XX学院},
-	degreetype = {工学},
-	confidential = {~~},
-	confidentialtime = {~~}}
+	supervisor = {香\quad \quad 农},
+	institute = {信息与通信工程学院},
+	degreetype = {工学}}
+
+%% \quad 相当于一个汉字的宽度，同时也相当于~~~~
 
 \BUPTthesisentitlepage{%
 	title = {A \LaTeX~TEMPLATE FOR PHD DISSERTATION OF BUPT},
@@ -23,9 +23,8 @@
 \begin{document}
 
 \makechinesetitle
-\clearpage
-\makestatement
 \makeenglishtitle
+\makestatement
 
 \frontmatter
 \include{Chapter/Chapter_cnabstract}
@@ -37,13 +36,13 @@
 
 \mainmatter
 \include{Chapter/Chapter_introduction}
-%\include{Chapter/Chapter_architecture}
-%\include{Chapter/Chapter_algorithm}
-%\bibliography{Bib/thesis}
+\include{Chapter/Chapter_architecture}
+\include{Chapter/Chapter_algorithm}
+\bibliography{Bib/thesis}
 
-%\backmatter
-%\include{Chapter/Chapter_abbreviation}
-%\include{Chapter/Chapter_acknowledgement}
-%\include{Chapter/Chapter_publication}
+\backmatter
+\include{Chapter/Chapter_abbreviation}
+\include{Chapter/Chapter_acknowledgement}
+\include{Chapter/Chapter_publication}
 
 \end{document}

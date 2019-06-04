@@ -78,21 +78,21 @@
 
 \ifBUPT@option@macos
   \LoadClass[
-  	UTF8,
-  	a4paper,
-  	twoside,
-  	sub3section,
-  	zihao = -4,
-  	fontset = fandol
+    UTF8,
+    a4paper,
+    zihao = -4,
+    fontset = fandol
   ]{ctexbook}[2015/05/03]
 \else
   \LoadClass[
-  	UTF8,
-  	a4paper,
-  	zihao = -4,
-  	fontset = fandol
+    UTF8,
+    a4paper,
+    zihao = -4,
+    fontset = fandol
   ]{ctexbook}[2015/05/03]
 \fi
+
+\setcounter{secnumdepth}{5}
 
 %% -----------------------------------------------------------------
 
@@ -132,7 +132,7 @@
 \RequirePackage{bm}
 \RequirePackage{mdwmath}
 \RequirePackage{xfrac}
-\RequirePackage{enumitem} 
+\RequirePackage{enumitem}
 
 %% Graphic Related Packages
 \ifBUPT@option@draftcls
@@ -141,15 +141,7 @@
   \RequirePackage{graphicx}
   %% In fact, the xunicode package has loaded the graphicx package.
 \fi
-\RequirePackage[table,usenames,svgnames,dvipsnames]{xcolor}
 \RequirePackage[font=footnotesize,subrefformat=parens]{subfig}
-\RequirePackage{caption}
-\DeclareCaptionFont{kaishu}{\kaishu}
-\captionsetup{format=plain,labelformat=simple,labelsep=space,justification=centering,font={small,kaishu}}
-\renewcommand{\theequation}{\thechapter--\arabic{equation}}
-\renewcommand{\thefigure}{\thechapter--\arabic{figure}}
-\renewcommand{\thetable}{\thechapter--\arabic{table}}
-%\renewcommand{\thealgorithm}{\thechapter--\arabic{algorithm}}
 
 %% Table and Array Packages
 \RequirePackage{makecell}
@@ -164,21 +156,22 @@
 \RequirePackage{IEEEtrantools}
 
 \RequirePackage[
-	linesnumbered,
-	lined,
-	boxruled,
-	commentsnumbered,
-	algochapter
+  linesnumbered,
+  lined,
+  boxruled,
+  commentsnumbered,
+  algochapter
 ]{algorithm2e}
 \RequirePackage{mathtools}
+\RequirePackage[table,usenames,svgnames,dvipsnames]{xcolor}
+\RequirePackage{longtable}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\newcolumntype{g}{>{\columncolor{LightSteelBlue}}c}
 
 %% Citation Packages
-%% natbib!!!
 %\RequirePackage[noadjust]{cite}
 \RequirePackage[super]{gbt7714}
-\RequirePackage{longtable}
 
 %% PDF, URL and Hyperlink Packages
 \RequirePackage{url}
@@ -196,19 +189,19 @@
 \RequirePackage[binary-units]{siunitx}
 
 %% Caption Package
-%% caption!!!
+\RequirePackage{caption}
+\DeclareCaptionFont{kaishu}{\kaishu}
+\captionsetup{format=plain,labelformat=simple,labelsep=space,justification=centering,font={small,kaishu}}
+\renewcommand{\theequation}{\thechapter--\arabic{equation}}
+\renewcommand{\thefigure}{\thechapter--\arabic{figure}}
+\renewcommand{\thetable}{\thechapter--\arabic{table}}
+%\renewcommand{\thealgorithm}{\thechapter--\arabic{algorithm}}
 
 %% Tocbibind Package
 \RequirePackage{tocbibind}
-\newcolumntype{g}{>{\columncolor{LightSteelBlue}}c}
+
 \AtEndOfClass{%
   \InputIfFileExists{config/buptthesis.cfg}{}{}}
-\setcounter{secnumdepth}{5}
-
-%% Cover Related Package
-\RequirePackage{xstring}
-\RequirePackage{forloop}
-\RequirePackage[comparenum]{arraysort}
 
 %% -----------------------------------------------------------------
 
@@ -292,9 +285,9 @@
     afterskip = 1 em,
   },
   subsubsection = {
-  	format = \heiti\zihao{-4}\bfseries\raggedright,
-  	beforeskip = 1 em,
-  	afterskip = 1 em,
+    format = \heiti\zihao{-4}\bfseries\raggedright,
+    beforeskip = 1 em,
+    afterskip = 1 em,
   },
 }
 
@@ -335,86 +328,108 @@
 
 %% Titlepage
 %% The \hss glue is equivalent to \hskip 0pt plus 1fil minus 1fil.
+%% Solution from https://github.com/CTeX-org/forum/issues/36
+\ExplSyntaxOn
+\seq_new:N \l_@@_title_seq
+\cs_new_protected:Npn \BUPT@setstr #1
+{ \exp_args:NNno \seq_set_split:Nnn \l_@@_title_seq { \\ } {#1} }
+%% o means expansion once.
+
+\dim_new:N \l_@@_title_width_dim
+\cs_new_protected:Npn \BUPT@printcovertitle
+{
+  \group_begin:
+  \@@_title_name_format:
+  \tl_use:N \c_@@_title_name_tl
+  \group_end:
+  \group_begin:
+  \@@_title_format:
+  \@@_get_max_width:NN \l_@@_title_width_dim \l_@@_title_seq
+  \dim_add:Nn \l_@@_title_width_dim { 20\p@ }
+  \dim_log:N \l_@@_title_width_dim
+  \parbox [t] { \l_@@_title_width_dim }
+  {
+    \seq_map_inline:Nn \l_@@_title_seq
+    { \@@_underline:Nn \l_@@_title_width_dim {##1} \\ }
+  }
+  \group_end:
+}
+
+\cs_new_protected:Npn \BUPT@infomaxwidth #1
+{
+  \group_begin:
+  \@@_info_format:
+  \@@_get_max_width:NN #1 \l_@@_title_seq
+  \group_end:
+}
+
+%% 获取最大宽度，存入 #1
+\cs_new_protected:Npn \@@_get_max_width:NN #1#2
+{
+  \group_begin:
+  \dim_zero:N #1
+  \bool_until_do:nn { \seq_if_empty_p:N #2 }
+  {
+    \seq_pop:NN #2 \l_tmpa_tl
+    \exp_args:NNV \@@_get_width:Nn \l_tmpa_dim \l_tmpa_tl
+    \dim_gset:Nn #1 { \dim_max:nn { \dim_use:N #1 } { \l_tmpa_dim } }
+  }
+  \group_end:
+}
+\cs_new_protected:Npn \@@_get_width:Nn #1#2
+{
+  \hbox_set:Nn \l_tmpa_box {#2}
+  \dim_set:Nn #1 { \box_wd:N \l_tmpa_box }
+}
+
+\cs_new_protected:Npn \@@_underline:Nn #1#2
+{ \underline { \hbox_to_wd:nn { \dim_use:N #1 } { \hss #2 \hss } } }
+
+\tl_const:Nn \c_@@_title_name_tl    { \BUPT@label@title }
+\cs_new:Npn  \@@_title_name_format: { \zihao{-2} \bfseries }
+\cs_new:Npn  \@@_title_format:      { \zihao{-2} \bfseries }
+\cs_new:Npn  \@@_info_format:      { \zihao{4} \bfseries }
+\ExplSyntaxOff
+
 \def\BUPTunderline#1#2{\underline{\hbox to #1{\hss #2\hss}}}
-\def\IsPositive#1{%
-	TT\fi
-	\ifcat_\ifnum0<0#1 _\else A\fi}
-\newsavebox\mybox
-\newcommand{\cmpLen}[2]{%
-	\sbox\mybox{#1}\edef\cmpA{\number\wd\mybox}
-	\sbox\mybox{#2}\edef\cmpB{\number\wd\mybox}
-	\if\IsPositive{\cmpA}
-		\if\IsPositive{\cmpB}
-			\arraysortcomparenum{\cmpA}{\cmpB}
-		\else
-			\togglefalse {arraysortresequal}
-			\toggletrue  {arraysortresult}
-		\fi
-	\else
-		\if\IsPositive{\cmpB}
-			\togglefalse {arraysortresequal}
-			\togglefalse {arraysortresult}
-		\else
-			\arraysortcomparenum{\cmpA}{\cmpB}
-		\fi
-	\fi}
-
-\long\def\BUPTtitletemp{\&\BUPT@value@title\&}
-\StrCount{\BUPTtitletemp}{\&}[\tempnum]
-\newcounter{NumofAnd}
-\setcounter{NumofAnd}{\tempnum}
-\newcounter{NumofRow}
-\setcounter{NumofRow}{\the\numexpr\value{NumofAnd}-1\relax}
-\newcounter{BUPTLoop}
-\newcounter{BUPTLoopp}
-\def\BUPTctrset{\setcounter{BUPTLoopp}{\theBUPTLoop}\stepcounter{BUPTLoopp}}
-\newarray{BUPTtitle}
-\expandarrayelementtrue
-\forloop{BUPTLoop}{1}{\value{BUPTLoop} < \value{NumofAnd}}{\BUPTctrset
-	\StrBetween[\value{BUPTLoop},\value{BUPTLoopp}]{\BUPTtitletemp}{\&}{\&}[\tempstr]
-	\BUPTtitle(\value{BUPTLoop})={\tempstr}}
-\sortArray[cmpLen]{\theNumofRow}{BUPTtitle}
-
-\newlength{\BUPTtitlelen}
-\settowidth{\BUPTtitlelen}{\BUPTtitle(\theNumofRow)}
-\addtolength{\BUPTtitlelen}{5pt}
-
-\newcommand\makechinesetitle{%
+\def\makechinesetitle{%
   \begin{flushright}
     \zihao{4}\bfseries \BUPT@label@confidential\BUPT@value@confidential~~~~\BUPT@label@confidentialtime\BUPT@value@confidentialtime~~~~
   \end{flushright}
-  \vskip \stretch{1}
   \begin{center}
     \includegraphics[width=12.67cm]{\BUPT@value@schoolname}
-    \vskip \stretch{0}
-    {\CJKfamily{zhhei}\fontsize{32}{\p@} \bfseries \BUPT@value@degree\BUPT@label@thesis}
-    \vskip \stretch{1}
+    \vskip \stretch{0.5}
+    {\heiti\fontsize{32}{\p@}\bfseries \BUPT@value@degree\BUPT@label@thesis}
+    \vskip \stretch{0.5}
     \includegraphics[width=3.43cm]{\BUPT@value@schoollogo}
-    \vskip \stretch{2}
-    {\zihao{-2}
-	\renewcommand\arraystretch{1.2}
-	\setlength\extrarowheight{1\p@}\bfseries
-	\begin{tabular}{rc}
-		\BUPT@label@title & \BUPTunderline{\BUPTtitlelen}{\StrBetween[1,2]{\BUPTtitletemp}{\&}{\&}} \\
-		\forloop{BUPTLoop}{2}{\value{BUPTLoop} < \value{NumofAnd}}{ & \BUPTctrset\BUPTunderline{\BUPTtitlelen}{\StrBetween[\value{BUPTLoop},\value{BUPTLoopp}]{\BUPTtitletemp}{\&}{\&}} \\}
-	\end{tabular}}
-    \vskip \stretch{1}
-    {\zihao{4}
-    \renewcommand\arraystretch{1.2}
-    \setlength\extrarowheight{1\p@}\bfseries
-    \begin{tabular}{lc}
-      \BUPT@label@studentid & \BUPTunderline{200\p@}{\BUPT@value@studentid} \\
-      \BUPT@label@name & \BUPTunderline{200\p@}{\BUPT@value@name} \\
-      \BUPT@label@major & \BUPTunderline{200\p@}{\BUPT@value@major} \\
-      \BUPT@label@supervisor & \BUPTunderline{200\p@}{\BUPT@value@supervisor} \\
-      \BUPT@label@institute & \BUPTunderline{200\p@}{\BUPT@value@institute}
+  \end{center}
+  \vskip \stretch{0.5}
+  \BUPT@setstr{\BUPT@value@title}
+  \begin{center}
+    \BUPT@printcovertitle
+  \end{center}
+  %% Line 353 already \\
+  \newlength{\BUPT@value@infomaxwidth}
+  \BUPT@setstr{\BUPT@value@studentid \\ \BUPT@value@name \\ \BUPT@value@major \\ \BUPT@value@supervisor \\ \BUPT@value@institute}
+  \BUPT@infomaxwidth{\BUPT@value@infomaxwidth}
+  \addtolength{\BUPT@value@infomaxwidth}{40\p@}
+  \begin{center}
+    {\zihao{4}\bfseries
+    \renewcommand\arraystretch{1.3}
+    \setlength\extrarowheight{1\p@}
+    \begin{tabular}{rc}
+      \BUPT@label@studentid & \BUPTunderline{\BUPT@value@infomaxwidth}{\BUPT@value@studentid} \\
+      \BUPT@label@name & \BUPTunderline{\BUPT@value@infomaxwidth}{\BUPT@value@name} \\
+      \BUPT@label@major & \BUPTunderline{\BUPT@value@infomaxwidth}{\BUPT@value@major} \\
+      \BUPT@label@supervisor & \BUPTunderline{\BUPT@value@infomaxwidth}{\BUPT@value@supervisor} \\
+      \BUPT@label@institute & \BUPTunderline{\BUPT@value@infomaxwidth}{\BUPT@value@institute}
     \end{tabular}}
-    \vskip \stretch{1}
-    {\CJKfamily{zhsong}\zihao{4}\bfseries \BUPT@value@chinesedate}
+    \vskip \stretch{0.5}
+    {\zihao{4}\bfseries \BUPT@value@chinesedate}
   \end{center}
   \cleardoublepage}
 
-\newcommand\makeenglishtitle{%
+\def\makeenglishtitle{%
   \begin{center}
     {\zihao{-2}\bfseries \BUPT@value@englishtitle}
     \vskip \stretch{2}
@@ -437,7 +452,7 @@
   \def\BUPT@label@authorizationcomment{~}
 \fi
 %\BUPTunderline{40\p@}{\BUPT@value@confidentialtime}
-\newcommand\makestatement{%
+\def\makestatement{%
   \begin{center}
     \bfseries \BUPT@label@innovationtitle
   \end{center}\par
@@ -466,7 +481,7 @@
   \end{center}\par
   \vskip 25\p@}%
   {}
-\newcommand\cnkeywords[1]{%
+\def\cnkeywords#1{%
   \vspace{2ex}\noindent{\bfseries\BUPT@label@keywords}#1}
 
 \newenvironment{enabstract}{%
@@ -477,7 +492,7 @@
   \end{center}\par
   \vskip 25\p@}%
   {}
-\newcommand\enkeywords[1]{%
+\def\enkeywords#1{%
   \vspace{2ex}\noindent{\bfseries\BUPT@label@englishkeywords}~~#1}
 
 %% Nomenclature
@@ -529,8 +544,17 @@
 \fi
 
 %% Extra definitions
-\newcommand{\cemph}[1]{\textcolor{RubineRed}{#1}}  % Emphasize with color RubineRed
-\DeclareSIUnit{\mdecibel}{\decibel\metre}  % dBm
+\def\cemph#1{\textcolor{RubineRed}{#1}}  % Emphasize with color RubineRed
+\DeclareSIUnit{\belmilliwatt}{Bm}
+\DeclareSIUnit{\belwatt}{BW}
+\DeclareSIUnit{\dBm}{\deci\belmilliwatt}
+\DeclareSIUnit{\dBW}{\deci\belwatt}
+\DeclareSIUnit{\bitabbr}{b}
+\DeclareSIUnit{\bits}{bits}
+\DeclareSIUnit{\bytefull}{byte}
+\DeclareSIUnit{\bytes}{bytes}
+\DeclareSIUnit{\bps}{\bitabbr\per\second}
+\DeclareSIUnit{\Bps}{\byte\per\second}
 
 %% -----------------------------------------------------------------
 

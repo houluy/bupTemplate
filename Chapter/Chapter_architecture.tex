@@ -4,13 +4,13 @@
 
 \subsection{数值与单位}
 
-单位采用宏包\href{http://mirrors.sjtug.sjtu.edu.cn/ctan/macros/latex/contrib/siunitx/siunitx.pdf}{\textit{siunitx}}插入，例如传输速率是$\SI{100}{\mega\byte}$，信噪比为$\SI{20}{\mdecibel}$。（注意，如果要使用字节单位，则需要增加选项\cemph{binary-units}） 
-
-引用一个表格\ref{chap:notation}。
+单位采用宏包\href{http://mirrors.sjtug.sjtu.edu.cn/ctan/macros/latex/contrib/siunitx/siunitx.pdf}{\textit{siunitx}}插入。例如，传输速率为\SI[per-mode = symbol, per-symbol = p]{100}{\mega\bps}，\SI[per-mode = symbol, per-symbol = p]{100}{\mega\Bps}。信息量为\SI{1}{\bit}，\SI{10}{\bits}，\SI{1}{\bytefull}，\SI{10}{\bytes}。发送功率为\SI{10}{\dBm}，\SI{10}{\dBW}。
 
 \section{表}
 
-\begin{table*}[!htb]
+引用一个表格\ref{chap:notation}。
+
+\begin{table}[!ht]
 	\centering
 	\caption{数学符号含义表（标题及序号置于表的正上方）}
 	\label{chap:notation}
@@ -24,32 +24,8 @@
 		$\gamma$ 				 & 信噪比			    & $\mathcal{T}$ 		& 时刻		 			   \\
 		\hline
 	\end{tabular}
-\end{table*}
+\end{table}
 
 \section{图}
 
-\begin{figure}
-	\centering
-	\includegraphics[width=0.8\textwidth]{scenario.eps}
-	\caption{场景示意图（五号楷体）}
-	\label{chap:scenario}
-\end{figure}
-
-图\ref{chap:scenario}展示了xxx。
-
-\begin{figure}[!htb]
-	\centering
-	\begin{minipage}{0.48\textwidth}
-		\includegraphics[width=\textwidth]{activation.eps}
-		\caption{激活函数}
-		\label{chap:activation}
-	\end{minipage}
-	\begin{minipage}{0.48\textwidth}
-		\includegraphics[width=\textwidth]{linear.eps}
-		\caption{线性函数}
-		\label{chap:linear}
-	\end{minipage}
-\end{figure}
-
-激活函数\ref{chap:activation}，线性函数\ref{chap:linear}
 
