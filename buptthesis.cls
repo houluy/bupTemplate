@@ -133,6 +133,7 @@
 \RequirePackage{mdwmath}
 \RequirePackage{xfrac}
 \RequirePackage{enumitem}
+\setlist{nosep}
 
 %% Graphic Related Packages
 \ifBUPT@option@draftcls
