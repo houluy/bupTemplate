@@ -2,7 +2,9 @@
 Thesis LaTeX Template for Beijing University of Posts and Telecommunications
 ==================
 
-|license||xelatex||university|
+|license|
+|xelatex|
+|university|
 
 This is a latex template for PhDs in BUPT to finish their dissertation in a no-hair-loss manner.
 
