@@ -29,7 +29,7 @@ Check `this file`_ for complete author list.
 .. _this file: https://github.com/houluy/bupTemplate/blob/master/AUTHORS.rst
 .. _here: https://github.com/houluy/bupTemplate/blob/master/docs/main.rst
 
-.. |license| image:: https://img.shields.io/badge/license-GPL--3.0-blue.svg
-.. |xelatex| image:: https://img.shields.io/badge/TeX-XeLaTeX-lightgrey.svg
-.. |university| image:: https://img.shields.io/badge/unversity-BUPT-red.svg
+.. |license| image:: https://img.shields.io/badge/license-GPL--3.0-blue.svg?style=plastic
+.. |xelatex| image:: https://img.shields.io/badge/TeX-XeLaTeX-lightgrey.svg?style=plastic
+.. |university| image:: https://img.shields.io/badge/unversity-BUPT-red.svg?style=plastic
 
