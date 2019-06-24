@@ -15,6 +15,41 @@ DOCUMENTATION
 Full docs are listed here_.
 
 ------------------
+ENVIRONMENT SETUP
+------------------
+
+- TeXLive (>= 2017 recommended)
+
+IMPORTANT: All files MUST be encoded in UTF-8.
+
+------------------
+TUTORIAL
+------------------
+********************
+Recommended Editor
+********************
+TeXStudio
+
+******************
+How to compile
+******************
+
+- Compile by hand
+
+.. code-block:: latex
+    :lineno:
+
+    % with bibtex
+    xelatex main.tex
+    bibtex main.tex
+    xelatex main.tex
+    xelatex main.tex
+
+- Compile by TeXStudio
+
+Press compile button.
+
+------------------
 AUTHOR LIST
 ------------------
 
@@ -32,4 +67,3 @@ Check `this file`_ for complete author list.
 .. |license| image:: https://img.shields.io/badge/license-GPL--3.0-blue.svg?style=plastic
 .. |xelatex| image:: https://img.shields.io/badge/TeX-XeLaTeX-lightgrey.svg?style=plastic
 .. |university| image:: https://img.shields.io/badge/unversity-BUPT-red.svg?style=plastic
-
