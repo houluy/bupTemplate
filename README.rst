@@ -29,7 +29,7 @@ TUTORIAL
 Recommended Editor
 ********************
 
-`TeXStudio<http://www.texstudio.org/>`_
+`TeXStudio <http://www.texstudio.org/>`_
 
 ******************
 How to compile
@@ -37,15 +37,13 @@ How to compile
 
 - Compile by hand
 
-.. code:: latex
-    :lineno:
+::
 
-    % with bibtex
+    # with bibtex
     xelatex main.tex
     bibtex main.tex
     xelatex main.tex
     xelatex main.tex
-
 
 - Compile by TeXStudio
 
