@@ -28,7 +28,8 @@ TUTORIAL
 ********************
 Recommended Editor
 ********************
-TeXStudio
+
+`TeXStudio<http://www.texstudio.org/>`_
 
 ******************
 How to compile
@@ -36,7 +37,7 @@ How to compile
 
 - Compile by hand
 
-.. code-block:: latex
+.. code:: latex
     :lineno:
 
     % with bibtex
@@ -44,6 +45,7 @@ How to compile
     bibtex main.tex
     xelatex main.tex
     xelatex main.tex
+
 
 - Compile by TeXStudio
 
