@@ -35,6 +35,8 @@ Recommended Editor
 How to compile
 ******************
 
+`xelatex` MUST be used to compile this project.
+
 - Compile by hand
 
 ::
@@ -47,7 +49,7 @@ How to compile
 
 - Compile by TeXStudio
 
-Press compile button.
+Configure the TeXStudio to use `xelatex` as default compiler and press compile button.
 
 ------------------
 AUTHOR LIST
