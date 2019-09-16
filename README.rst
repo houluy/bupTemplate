@@ -35,7 +35,7 @@ Recommended Editor
 How to compile
 ******************
 
-`xelatex` MUST be used to compile this project.
+``xelatex`` MUST be used to compile this project.
 
 - Compile by hand
 
@@ -49,7 +49,16 @@ How to compile
 
 - Compile by TeXStudio
 
-Configure the TeXStudio to use `xelatex` as default compiler and press compile button.
+Configure the TeXStudio to use ``xelatex`` as default compiler and press compile button.
+
+***********************
+How to add chapter
+***********************
+
+- Add a new ``tex`` file in ``Chapter`` directory, assuming the name is ``chapter_I.tex``.
+- Open this file, append ``\chapter{Your chapter title}`` in the very start.
+- Add a new line ``\include{Chapter/chapter_I.tex}`` in ``main.tex`` after ``\mainmatter``.
+- Then compile.
 
 ------------------
 AUTHOR LIST
