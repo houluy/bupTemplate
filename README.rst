@@ -20,7 +20,7 @@ ENVIRONMENT SETUP
 
 - TeXLive (>= 2017 recommended)
 
-IMPORTANT: All files MUST be encoded in UTF-8.
+IMPORTANT: All files *MUST* be encoded in UTF-8.
 
 ------------------
 TUTORIAL
@@ -35,7 +35,7 @@ Recommended Editor
 How to compile
 ******************
 
-``xelatex`` MUST be used to compile this project.
+*Only* ``xelatex`` can be used to compile this project.
 
 - Compile by hand
 
@@ -56,7 +56,7 @@ How to add chapter
 ***********************
 
 - Add a new ``tex`` file in ``Chapter`` directory, assuming the name is ``chapter_I.tex``.
-- Open this file, append ``\chapter{Your chapter title}`` in the very start.
+- Open this file, insert ``\chapter{Your chapter title}`` as first line.
 - Add a new line ``\include{Chapter/chapter_I.tex}`` in ``main.tex`` after ``\mainmatter``.
 - Then compile.
 
