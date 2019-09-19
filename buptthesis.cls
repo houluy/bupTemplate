@@ -218,6 +218,10 @@
 %% oneside:
 \geometry{left=2.75cm, right=2.75cm, top=3cm, bottom=3cm}
 
+%% Typeset LaTeX commands as text
+\RequirePackage{listings}
+\newcommand{\latextext}[1]{\lstinline[language={[LaTeX]TeX}, basicstyle=\ttfamily] {#1}}
+
 %% Degree
 \ifBUPT@option@phd
   \def\BUPT@value@degree{\BUPT@label@phddegree}

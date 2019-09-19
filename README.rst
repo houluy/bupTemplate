@@ -60,6 +60,14 @@ How to add chapter
 - Add a new line ``\include{Chapter/chapter_I.tex}`` in ``main.tex`` after ``\mainmatter``.
 - Then compile.
 
+********************************************
+How to remove the line number in algorithms
+********************************************
+
+- Open class file ``buptthesis.cls``, find the line with ``\RequirePackage[xxx]{algorithm2e}``.
+- Remove the option ``linesnumbered`` and re-compile.
+- The meanings of the rest options can be found `here <http://tug.ctan.org/macros/latex/contrib/algorithm2e/doc/algorithm2e.pdf>`__ in Chapter 7.
+
 ------------------
 AUTHOR LIST
 ------------------
